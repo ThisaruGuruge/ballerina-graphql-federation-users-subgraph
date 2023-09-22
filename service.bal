@@ -1,7 +1,9 @@
 import user_subgraph.datasource;
 
 import ballerina/graphql;
+import ballerina/graphql.subgraph;
 
+@subgraph:Subgraph
 service on new graphql:Listener(9092) {
 
     # Returns the list of users

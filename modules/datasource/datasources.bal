@@ -1,6 +1,14 @@
-public isolated function getUsers() returns User[] {
+public isolated function getUsers() returns readonly & User[] {
     lock {
-        User[] result = from User user in users select user.cloneReadOnly();
-        return result.cloneReadOnly();
+        return from User user in users select user.cloneReadOnly();
     }
+}
+
+public isolated function getUser(string id) returns User? {
+    lock {
+        if users.hasKey(id) {
+            return users.get(id);
+        }
+    }
+    return;
 }
